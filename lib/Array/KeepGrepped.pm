@@ -7,12 +7,10 @@ require Exporter;
 
 sub kgrep (&@) {
     my $filter = shift;
-    my $filtered = [];
-    my @keep;
+    my ($filtered,@keep);
     local $_;
-    for my $item (@_) {
-        $_ = $item;
-        if ( $filter->($_) ) {
+    for (@_) {
+        if ( $filter->() ) {
             push @$filtered, $_;
             }
         else {

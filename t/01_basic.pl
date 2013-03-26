@@ -1,4 +1,4 @@
-use Test::More tests => 12;
+use Test::More tests => 5;
 
 use lib 'lib';
 use Array::KeepGrepped qw/kgrep/;
@@ -6,20 +6,23 @@ use Array::KeepGrepped qw/kgrep/;
 NUMERIC: {
     my @numbers = 1..10;
     my ($odds, @evens) = kgrep { $_ % 2 } @numbers;
-    for my $odd (1,3,5,7,9) {
-        ok($odd == shift @$odds, 'Correct odd numbers');
-        }
-    for my $even (2,4,6,8,10) {
-        ok($even == shift @evens, 'Correct even numbers');
-        }
+    is_deeply($odds, [1,3,5,7,9], 'Correct odd numbers');
+    is_deeply(\@evens, [2,4,6,8,10], 'Correct even numbers');
     }
 
 IN_PLACE: {
     my @good = qw/good bad good evil good wicked good/;
     my $bad;
     ($bad, @good) = kgrep { $_ !~ /good/ } @good;
-    is(@$bad, 3, 'Correct number of bad values');
-    is(@good, 4, 'Correct number of good values');
+    is_deeply($bad, [qw/bad evil wicked/], 'Correct bad values');
+    is_deeply(\@good, [qw/good good good good/], 'Correct good values');
+    }
+
+CHECK_LOCAL: {
+    $_ = 'foo';
+    my @bar = qw/aaa bbb/;
+    my ($aaa, @bbb) = kgrep { $_ !~ /a/ } @bar;
+    is($_, 'foo', '$_ unchanged');
     }
 
 done_testing();
