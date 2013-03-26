@@ -23,10 +23,6 @@ sub kgrep (&@) {
 
 1;
 
-=head1 NAME
-
-Array::KeepGrepped
-
 =head1 SYNOPSIS
 
     use Array::KeepGrepped qw/kgrep/;
@@ -55,14 +51,6 @@ in-place, but still be able to use what you removed.
     ($bad, @good) = kgrep { $_ !~ /good/ } @good;
 
     say "@$bad | @good";   # bad evil wicked | good good good good
-
-=head1 AUTHOR
-
-Dominic Humphries, dominic@oneandoneis2.com
-
-=head1 VERSION
-
-1 (2013 03 26)
 
 =head1 SEE ALSO
 
