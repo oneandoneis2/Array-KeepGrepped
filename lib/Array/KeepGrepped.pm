@@ -1,4 +1,5 @@
 package Array::KeepGrepped;
+# ABSTRACT: Like grep, only keeps the stuff it filters out
 
 require Exporter;
 @ISA = qw/Exporter/;
