@@ -1,6 +1,7 @@
 # Array::KeepGrepped
 
-## Like 'grep', only it keeps the filtered-out entries in a sperate array.
+## It's like 'grep'
+...only it keeps the filtered-out entries in a seperate array.
 
 ## To develop
 
