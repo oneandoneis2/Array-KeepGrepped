@@ -1,4 +1,4 @@
-use Test::More tests => 5;
+use Test::More tests => 6;
 
 use lib 'lib';
 use Array::KeepGrepped qw/kgrep/;
@@ -23,6 +23,13 @@ CHECK_LOCAL: {
     my @bar = qw/aaa bbb/;
     my ($aaa, @bbb) = kgrep { $_ =~ /a/ } @bar;
     is($_, 'foo', '$_ unchanged');
+    }
+
+LIKE_GREP: {
+    my @test = qw/a b c d/;
+    my @grep = grep { !$_ =~ m#a# } @test;
+    my (undef, @kgrep) = kgrep { !$_ =~ m#a# } @test;
+    is_deeply(\@grep, \@kgrep, 'kgrep matches grep filtering');
     }
 
 done_testing();
