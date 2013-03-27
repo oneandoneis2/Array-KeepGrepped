@@ -1,6 +1,8 @@
 package Array::KeepGrepped;
 # ABSTRACT: Like grep, only keeps the stuff it filters out
 
+our $VERSION = 5;
+
 require Exporter;
 @ISA = qw/Exporter/;
 @EXPORT_OK = qw/kgrep/;
